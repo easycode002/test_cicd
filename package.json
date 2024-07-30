@@ -1,10 +1,12 @@
 {
   "name": "demo_cicd",
-  "homepage": "http://{username}.github.io/{repo-name}",
+  "homepage": "https://easycode002.github.io/test_cicd",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
