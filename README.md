@@ -19,5 +19,8 @@ like this
 - add this to script
 ```
 "predeploy":"npm run build",
-"deploy":"gh-pages -d build"
+"deploy":"gh-pages -d dist"
 ```
+
+
+// https://www.youtube.com/watch?v=GqyC_R3UjjQ
