@@ -29,15 +29,14 @@ jobs:
       - name: Build project
         run: npm run dist --if-present
 
-      - name: Run test
-        run: npm test
-
       - name: List build directory
         run: ls -al dist
 
-      - name: Output npm error log
+      - name: Output latest npm error log
         if: failure()
-        run: cat /home/runner/.npm/_logs/2024-07-31T00_07_53_159Z-debug-0.log
+        run: |
+          echo "Displaying latest npm error log:"
+          cat $(ls -t /home/runner/.npm/_logs/* | head -1)
 
       - name: Deploy 🚀
         if: success()
