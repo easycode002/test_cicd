@@ -1,15 +1,13 @@
-
 name: Deploy react js using GutHub action
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,17 +15,27 @@ jobs:
         node-version: [18.x]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v4
 
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: dist
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run dist --if-present
+
+      - name: Run test
+        run: npm test
+
+      - name: List build directory
+        run: ls -al dist
+        
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
