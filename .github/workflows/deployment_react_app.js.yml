@@ -34,8 +34,13 @@ jobs:
 
       - name: List build directory
         run: ls -al dist
-        
+
+      - name: Output npm error log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/2024-07-31T00_07_53_159Z-debug-0.log
+
       - name: Deploy 🚀
+        if: success()
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
